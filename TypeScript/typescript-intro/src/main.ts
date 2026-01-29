@@ -2,7 +2,11 @@ import './style.css'
 //---requerir un modulo
 //import './topic/01-basic-types'
 //import './topic/02-object-interface'
-import './topic/03-functions'
+//import './topic/04-tarea-types.ts'
+//import './topic/05-basic-destruturing.ts'
+import "./topic/06-function-destructuring.ts"
+
+
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
 
