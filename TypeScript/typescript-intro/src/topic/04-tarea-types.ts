@@ -24,7 +24,7 @@ const superHeroe: SuperHero = {
         country: 'USA',
         city: 'NY'
     },
-    showAddress() {
+    showAddress() : string {
         return this.name + ', ' + this.address.city + ', ' + this.address.country;
     }
 }

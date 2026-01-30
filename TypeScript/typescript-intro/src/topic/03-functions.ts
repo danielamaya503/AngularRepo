@@ -5,7 +5,7 @@ function addNumbers(a: number, b: number){
 }
 
 //Función flecha con tipado
-const addNumbersArrow = (a: number, b: number) : string=> {
+const addNumbersArrow = (a: number, b: number) : string => {
     // especificando que el valor de retorno es un string
     return `${a + b}`;
 }
