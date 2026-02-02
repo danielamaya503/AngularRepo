@@ -1,57 +1,37 @@
-import {Component, signal} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {CharacterList} from '../../Components/dragonball/character-list/character-list';
+import {CharacterAdd} from '../../Components/dragonball/character-add/character-add';
+import {Character} from '../../interfaces/character';
+import {DragonballServices} from '../../Services/dragonball.services';
 //import {NgClass} from '@angular/common';
 
-interface Character{
-  id: number;
-  name: string;
-  power: number;
-}
+
 
 @Component({
   templateUrl: "dragonball-super-page.component.html",
   imports: [
-    CharacterList
+    CharacterList,
+    CharacterAdd,
   ],
   selector: `dragonball-super`
 })
 
 export class DragonballSuperPageComponent {
-  characters = signal<Character[]> ([
-    {id: 1, name: "Goku", power: 9001},
-    {id: 2, name: "Vegeta", power: 8001}
-  ]);
+  //-----INYECCCION DE DEPENCIAS (SERVICES)----
+  /*constructor(
+    public dragonballService : DragonballServices
+  ) {
+  }*/
 
-  name = signal("");
-  power = signal(0);
+  //forma de inyeccion de dependecia angular/core
+  public dragonballService = inject(DragonballServices);
 
-  addCharacters(){
-    if(!this.name || !this.power() || this.power() < 0){
-      return;
-    }
 
-    const newCharacter : Character = {
-      id: this.characters.length + 1,
-      name: this.name(),
-      power: this.power(),
-    };
-
-    //actyalizar lista a todas las señales
-    this.characters.update(
-      (list) => [... list, newCharacter]
-    )
-
-    this.resetData();
-  }
-
-  resetData(){
-    this.name.set("");
-    this.power.set(0);
-  }
   /*powerClass = computed( () => {
     return {
       "text-danger": true,
     }
   })
   */
+  protected readonly CharacterList = CharacterList;
 }

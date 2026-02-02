@@ -1,9 +1,9 @@
-<p>character-list works!</p>
+<h1> {{listName }} </h1>
 
 <h3 class="mt-2">Personajes</h3>
 <ul>
 
-  @for (character of characters(); track character.id; let idx = $index) {
+  @for (character of characters; track character.id; let idx = $index) {
 
     @if (character.power > 1000) {
       <li>

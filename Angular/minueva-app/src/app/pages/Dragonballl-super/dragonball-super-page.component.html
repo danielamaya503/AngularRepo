@@ -4,37 +4,19 @@
   <div class="row">
 
     <div class="col-12 col-sm-6">
-      <h3 class="mt-2">Agregar:</h3>
-      <label>Nombre del personaje:</label>
-      <input
-        type="text"
-         class="form-control"
-         placeholder="Goku"
-         [value]="name()"
-         (change)="name.set(textName.value)"
-          (input)="name.set(textName.value)"
-         #textName
-      >
-      <label>Poder:</label>
-      <input
-        type="number"
-        class="form-control"
-        placeholder="0"
-        [value]="power()"
-        (change)="power.set(+textPower.value)"
-        (input)="power.set(+textPower.value)"
-        #textPower
-        required
-      >
 
-      <button (click)="addCharacters()"  class="mt-2 btn btn-primary">
-        Agregar
-      </button>
+      <!--OUTPUT = componente dragonball-character-add -->
+      <!-- aqui -->
 
+      <dragonball-character-add
+        (newCharacter)=" dragonballService.addCharacters($event)" )
+      />
+      <!-- hasta aqui  -->
     </div>
 
     <div class="col-12 col-sm-6">
-      <dragonball-component-list [xejemplo]="characters()"/>
+      <!--INPUT = <dragonball-component-list [xejemplo]="characters()"/> -->
+      <dragonball-character-list listName="Listado de personajes" [characters]="dragonballService.characters()" />
     </div>
 
   </div>

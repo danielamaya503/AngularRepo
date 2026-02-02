@@ -2,10 +2,17 @@ import { Component, Input, input } from '@angular/core';
 import type { Character } from "../../../interfaces/character";
 
 @Component({
-  selector: 'dragonball-component-list',
+  selector: 'dragonball-character-list',
   templateUrl: './character-list.html',
 })
 export class CharacterList {
-    //characters: input.required<Character[]>()
-  @Input() xejemplo: string = '';
+    //version 21 angular
+    //characters = input.required<Character[]>();
+
+  // version 19 PGR
+   @Input({required: true}) characters!  : Character[];
+   @Input({required: true}) listName!: string;
+
+  //version 19 debo de aprender
+  //@Input() xejemplo: string = '';
 }
