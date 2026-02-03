@@ -3,6 +3,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    //crear url para imports
+    "baseUrl": ".",
+    //path es para saber donde esta
+    "paths": {
+      "@environments/*": ["src/environments/*"]
+    },
+
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
