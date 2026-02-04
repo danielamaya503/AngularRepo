@@ -1,8 +1,9 @@
-import {Component, signal} from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 import {GifsList} from '../../components/gifs-side-menu/gifs-list/gifs-list';
+import {GifsService} from '../../services/gifs.service';
 
 //obejcto que mandaremos a hijo a hijo para que nuestro componente resiva nuestras imagenes
-const imageUrl: string[] = [
+/*const imageUrl: string[] = [
   "https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg",
   "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
   "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg",
@@ -15,7 +16,7 @@ const imageUrl: string[] = [
   "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg",
   "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg",
   "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-11.jpg"
-];
+];*/
 
 @Component({
   selector: 'app-trending-page',
@@ -28,6 +29,8 @@ const imageUrl: string[] = [
 export default class TrendingPage {
 
   //crear propiedad para las imagenes
-  protected readonly imageUrl= imageUrl;
+  //protected readonly imageUrl= imageUrl;
+  gifsService = inject(GifsService);
+
 
 }

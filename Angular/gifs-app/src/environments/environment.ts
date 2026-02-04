@@ -4,9 +4,13 @@ export const environment = {
   companyName2: `APP`,
   companySlogan: `Maneja tus gifs`,
 
+  //user
+  name: "Daniel Amaya",
+
   //ApiKeys
-  giphyApiKey: "50vgtEm6N9rKbufCWOuBv77frD02hB0l",
-  giphyUrl: "https://api.giphy.com/v1",
+  giphyApiKey: "Vmkgm1xymmGnfSpRH7PU0rpbZgMpRMlO",
+
 
   //URLS
+  giphyUrl: "https://api.giphy.com/v1",
 };

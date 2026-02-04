@@ -3,7 +3,7 @@
 <div class="py-5">
 
   <!-- Usamos componente Input que resivira nuestro objecto [variable hija] = "variable padre" -->
-  <gifs-list [gifsImage]="imageUrl"  />
+  <gifs-list [gifsImage]="gifsService.trendingGifs()"  />
 
 </div>
 

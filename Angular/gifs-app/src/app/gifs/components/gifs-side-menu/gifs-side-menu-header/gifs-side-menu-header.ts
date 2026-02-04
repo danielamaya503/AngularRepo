@@ -13,4 +13,5 @@ export class GifsSideMenuHeader {
   //environments es para crear variales de entorno y apis
   envs = environment;
 
+    protected readonly environment = environment;
 }
