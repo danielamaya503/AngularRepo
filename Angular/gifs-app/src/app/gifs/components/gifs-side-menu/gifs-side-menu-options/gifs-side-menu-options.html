@@ -1,5 +1,6 @@
 <div id="nav" class="w-full px-6">
 
+  <!-- Recorremos nuestro array de opciones Trending y Search creado para muestra de informacion correcta -->
   @for (item of menuOption ; track item.router) {
     <a
       [routerLink]="item.router"

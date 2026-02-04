@@ -10,6 +10,7 @@ import {GifsSideMenuOptions} from './gifs-side-menu-options/gifs-side-menu-optio
   ],
   templateUrl: './gifs-side-menu.html',
 })
+
 export class GifsSideMenu {
 
 }

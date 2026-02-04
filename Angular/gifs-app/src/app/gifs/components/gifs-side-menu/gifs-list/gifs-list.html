@@ -1,3 +1,9 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-  <gifs-list-item/>
+
+  <!-- usando @for recorremos cada string que contiene las url para enviarlo gifs:string-->
+  @for (gifs of gifsImage; track gifs) {
+    <!-- objecto resivido se lo enviamos a hijo -->
+    <gifs-list-item [gifsImagen]="gifs" />
+  }
+
 </div>

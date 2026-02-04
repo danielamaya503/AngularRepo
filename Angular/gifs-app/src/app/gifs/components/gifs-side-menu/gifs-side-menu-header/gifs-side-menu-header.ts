@@ -10,6 +10,7 @@ import {environment} from '@environments/environment';
 
 export class GifsSideMenuHeader {
 
+  //environments es para crear variales de entorno y apis
   envs = environment;
 
 }

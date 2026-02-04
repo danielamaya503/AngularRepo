@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 
-interface MenuOption {
-  icon: string,
-  label: string,
-  router: string,
-  subLavel: string,
-}
+
 
 @Component({
   selector: 'gifs-side-menu-options',
@@ -20,7 +15,7 @@ interface MenuOption {
 //creador de enructamiento
 export class GifsSideMenuOptions {
 
-  //Objecto para los menu
+  //Objecto para nuestro menu Trending y Search de interfaz menuOption como objecto array []
   menuOption : MenuOption[] = [
     {
       icon: "fa-solid fa-chart-line",

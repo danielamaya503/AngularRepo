@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {GifsListItem} from './gifs-list-item/gifs-list-item';
 
 @Component({
@@ -8,6 +8,11 @@ import {GifsListItem} from './gifs-list-item/gifs-list-item';
   ],
   templateUrl: './gifs-list.html',
 })
+
 export class GifsList {
 
+  //creamos nuestro input que resivira nuestro objecto
+   @Input({required: true}) gifsImage: string[] = [];
+
 }
+
