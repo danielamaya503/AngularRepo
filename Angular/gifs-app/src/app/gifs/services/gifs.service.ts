@@ -1,10 +1,22 @@
 import { HttpClient } from '@angular/common/http';
-import {inject, Injectable, signal} from '@angular/core';
+import {computed, effect, inject, Injectable, signal} from '@angular/core';
 import { environment } from '@environments/environment';
 import {GiphyItem, GiphyResponse} from '../interfaces/giphy.interfaces';
 import {Gif} from '../interfaces/gifs-interface';
 import {GifsMapper} from '../mapper/gifs.mapper';
 import {map, tap} from 'rxjs';
+
+const gif_key = `gifs`;
+
+//Iniciarlizar nuestro LocalStorage para tener nuestro valor vacio
+const loadFromLocalStorage = () => {
+  const gifsFromLocalStorage = localStorage.getItem(gif_key) ?? `{}`;
+  const  gifs = JSON.parse(gifsFromLocalStorage);
+  console.log(gifs);
+  return gifs;
+}
+
+
 
 //Decoratico de innjectable para usar service
 @Injectable({providedIn: 'root'})
@@ -12,14 +24,30 @@ export class GifsService {
 
   //poder usar httpClient como put, post, get, delete
   private http = inject(HttpClient);
+
   //obtener data del api personalizada como signal
   trendingGifs = signal<Gif[]>([]);
   trendingGifsLoading = signal(true);
+
+  //Obtener nuestra data como buscador
   searchGif = signal<Gif[]>([]);
+
+  //Manejo de Historial en cache con objecto literal
+  //Inicializar con loadFromLocalStorage
+  searchHistory = signal<Record<string, Gif[]>>(loadFromLocalStorage());
+  //Obtener las llaves del searchHistory como señal computada
+  searchHistoryKey = computed( () => Object.keys(this.searchHistory()));
+
+  //Crear LocalStage para guardar nuestro historial de gif
+  saveGifsLocalStorage = effect( () => {
+    //Convierte mu array a JSON STRING
+    const historyString = JSON.stringify(this.searchHistory());
+    //guardar en LocalStorage
+    localStorage.setItem(gif_key, historyString);
+  });
 
   constructor() {
     this.loadTrendingGifs();
-    console.log("Service created")
   }
 
   loadTrendingGifs() {
@@ -49,19 +77,32 @@ export class GifsService {
         limit: 20,
         q: query,
       }
-    })
-      .pipe(
+    }).pipe(
+      //mapear nuestra data directamente, para recibirlo en nuestro component
       map( ({data}) => data),
-      map( ({items}) => GifsMapper.mapGiphtItemToGifArray(items)),
-    );
+      map( (items) => GifsMapper.mapGiphtItemToGifArray(items)),
 
+        //Usar efectos secundarios para guardar historial del usuario
+        tap( items => {
+          //Actualizar señal computada agregando ({}) sirve para agregar nuevas llaves
+          this.searchHistory.update( (history) => ({
+            ...history, //agrega el historial que ya estaba
+            [query.toLowerCase()]: items //apunta a items para agregar nueva data
+          }) )
+        })
+    )
     /*subscribe( (resp) => {
       const gifs = GifsMapper.mapGiphtItemToGifArray(resp.data);
       this.searchGif.set(gifs);
       console.log(gifs);
     });
     */
+  }
 
+  //Donde hemos guardado nuestro historial {"gas": {}, "agua": {}}
+  //usando query buscamos en nuestras llaves como gas{}
+  getHistoryGifs(query: string): Gif[]{
+    return this.searchHistory()[query] ?? [];
   }
 
 }

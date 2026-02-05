@@ -18,6 +18,12 @@ export const routes: Routes = [
           loadComponent: () => import("./gifs/pages/search-page/search-page")
         },
         {
+          //:query es arggumento dinamico
+          path: "history/:query",
+          loadComponent: () =>
+            import("./gifs/pages/history-page/history-page")
+        },
+        {
           path: "**",
           redirectTo: "trending"
         }

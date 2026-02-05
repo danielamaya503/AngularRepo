@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {GifsSideMenuHeader} from './gifs-side-menu-header/gifs-side-menu-header';
 import {GifsSideMenuOptions} from './gifs-side-menu-options/gifs-side-menu-options';
+import {GifsService} from '../../services/gifs.service';
 
 @Component({
   selector: 'gifs-side-menu',
@@ -12,5 +13,7 @@ import {GifsSideMenuOptions} from './gifs-side-menu-options/gifs-side-menu-optio
 })
 
 export class GifsSideMenu {
+
+  gifsHitorial = inject(GifsService);
 
 }
