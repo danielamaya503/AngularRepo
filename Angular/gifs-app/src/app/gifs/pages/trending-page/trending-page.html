@@ -1,9 +1,33 @@
 <!-- gifs-list -->
   <!-- gifs-list-item -->
-<div class="py-5">
+<!--
+   <div class="py-5">
+      <gifs-list [gifsImage]="gifsService.trendingGifs()"  />
+    </div>
+-->
 
-  <!-- Usamos componente Input que resivira nuestro objecto [variable hija] = "variable padre" -->
-  <gifs-list [gifsImage]="gifsService.trendingGifs()"  />
 
+
+<div
+  class="h-full  overflow-y-scroll grid grid-cols-2 md:grid-cols-4 gap-4 pt-5"
+   (scroll)="onScroll($event)"
+  #groupDiv
+>
+
+  <!--Anidar for para mostrar -->
+  <!--trendingGifGroup @for recorre cada grupo [ [], [], [] ]-->
+  @for (group of gifsService.trendingGifGroup() ; track $index) {
+    <div class="grid gap-4">
+      <!--@for recorre los gifs dentro de ese grupo y los coloca uno debajo del otro en la misma columna. -->
+      @for (gif of group; track gif.id) {
+        <div>
+          <img
+            class="h-full w-full rounded-lg object-cover"
+            [src]="gif.url"
+            [alt]="gif.title"
+          >
+        </div>
+      }
+    </div>
+  }
 </div>
-

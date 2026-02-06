@@ -29,6 +29,20 @@ export class GifsService {
   trendingGifs = signal<Gif[]>([]);
   trendingGifsLoading = signal(true);
 
+  //mostrar Masonry grid
+  //obtiene una señal computada leyendo trendingGifs (todos los gifs)
+  //<Gif[][]> significa que el resultado será un array de arrays de Gif (una matriz bidimensional).
+  trendingGifGroup = computed<Gif[][]>( () => {
+    const groups = [];
+    //ir 3 en 3
+    for(let i = 0; i < this.trendingGifs().length; i+=3){
+      //slice corta 3 en 3
+      groups.push(this.trendingGifs().slice(i, i + 3));
+    }
+
+    return groups;
+  });
+
   //Obtener nuestra data como buscador
   searchGif = signal<Gif[]>([]);
 
