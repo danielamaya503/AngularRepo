@@ -27,7 +27,8 @@ export class GifsService {
 
   //obtener data del api personalizada como signal
   trendingGifs = signal<Gif[]>([]);
-  trendingGifsLoading = signal(true);
+  trendingGifsLoading = signal(false);
+  private trendingPage = signal(0);
 
   //mostrar Masonry grid
   //obtiene una señal computada leyendo trendingGifs (todos los gifs)
@@ -65,6 +66,11 @@ export class GifsService {
   }
 
   loadTrendingGifs() {
+    if(this.trendingGifsLoading() ){
+      return;
+    }
+
+    this.trendingGifsLoading.set(true);
     //llamar al endpoint de giphy
     //environment.giphyUrl contiene la url base de giphy
      this.http.get<GiphyResponse>(`${environment.giphyUrl}/gifs/trending`, {
@@ -73,13 +79,17 @@ export class GifsService {
       params: {
         api_key: environment.giphyApiKey,
         limit: '25',
+        offset: this.trendingPage() * 20,
       },
        //siempre hay que suscribirse para crear una instancia
      }).subscribe( (resp) => {
         const gifs = GifsMapper.mapGiphtItemToGifArray(resp.data);
-        this.trendingGifs.set(gifs);
+        this.trendingGifs.update(currentGifs => [
+          ...currentGifs,
+          ...gifs
+        ]);
+        this.trendingPage.update( page => page +1);
         this.trendingGifsLoading.set(false);
-        console.log(gifs);
      });
   }
 
