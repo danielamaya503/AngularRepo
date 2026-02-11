@@ -1,10 +1,15 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {RouterLink, RouterOutlet} from '@angular/router';
 import {environment} from '../environments/environment';
+import {Footer} from './shared/component/footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    Footer
+  ],
   templateUrl: './app.html',
 })
 export class App {
