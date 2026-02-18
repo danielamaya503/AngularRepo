@@ -6,7 +6,6 @@ import {CountrySearchInput} from '../../component/country-search-input/country-s
   selector: 'by-region-page',
   imports: [
     CountryListTable,
-    CountrySearchInput
   ],
   templateUrl: './by-region-page.html',
 })

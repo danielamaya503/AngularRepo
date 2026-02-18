@@ -1,22 +1,71 @@
 <section class="mt-5">
-  <table class="table table-md mt-2 w-full">
-    <thead>
-    <tr>
-      <th>#</th>
-      <th>Icono</th>
-      <th>Bandera</th>
-      <th>Nombre</th>
-      <th>Capital</th>
-      <th>Poblacion</th>
-      <th></th>
-    </tr>
-    </thead>
 
-    <tbody>
-    <tr>
+  <div class="card pt-3">
+    <p-table
+      [value]="countries"
+      [paginator]="true"
+      [rows]="5"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [rowsPerPageOptions]="[5, 10, 20]"
+    >
 
-    </tr>
-    </tbody>
-  </table>
+      <ng-template #header>
+        <tr>
+          <th pSortableColumn="Icono" style="width:20%">
+            <div class="flex items-center gap-2">
+              Icono
+            </div>
+          </th>
+          <th pSortableColumn="Bandera" style="width:20%">
+            <div class="flex items-center gap-2">
+              Bandera
+            </div>
+          </th>
+          <th pSortableColumn="Nombre" style="width:20%">
+            <div class="flex items-center gap-2">
+              Nombre
+            </div>
+          </th>
+          <th pSortableColumn="Capital" style="width:20%">
+            <div class="flex items-center gap-2">
+              Capital
+            </div>
+          </th>
+          <th pSortableColumn="Poblacion" style="width:20%">
+            <div class="flex items-center gap-2">
+              Poblacion
+            </div>
+          </th>
+          <th pSortableColumn="info" style="width:20%">
+            <div class="flex items-center gap-2">
+
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-countries>
+        <tr>
+          <td>{{ countries.flag}}</td>
+          <td>
+            <img
+              class="w-10"
+              [src]="countries.flags.svg"
+              [alt]="countries.name.common"
+            >
+          </td>
+          <td>{{ countries.name.common}}</td>
+          <td>{{ countries.capital}}</td>
+          <td>{{ countries.population}}</td>
+          <td>
+            <a class="link-info cursor-pointer">Mas información</a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+
+
+
 </section>
 
