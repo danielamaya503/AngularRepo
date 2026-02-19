@@ -5,8 +5,8 @@ import {CountrySearchInput} from '../../component/country-search-input/country-s
 @Component({
   selector: 'by-country-page',
   imports: [
+    CountrySearchInput,
     CountryListTable,
-    CountrySearchInput
   ],
   templateUrl: './by-country-page.html',
 })

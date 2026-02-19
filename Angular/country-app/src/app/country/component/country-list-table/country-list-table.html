@@ -49,13 +49,17 @@
           <td>
             <img
               class="w-10"
-              [src]="countries.flags.svg"
-              [alt]="countries.name.common"
+              [src]="countries.flagSvg"
+              [alt]="countries.name"
             >
           </td>
-          <td>{{ countries.name.common}}</td>
+          <td>{{ countries.name}}</td>
           <td>{{ countries.capital}}</td>
-          <td>{{ countries.population}}</td>
+          <td>
+            <span class="badge badge-secondary">
+              {{ countries.population | number}}
+            </span>
+          </td>
           <td>
             <a class="link-info cursor-pointer">Mas información</a>
           </td>

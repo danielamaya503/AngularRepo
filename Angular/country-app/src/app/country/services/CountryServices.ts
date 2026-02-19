@@ -2,6 +2,9 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {RestCountry} from '../interfaces/rest-countries';
+import {map, Observable, catchError, throwError} from 'rxjs';
+import {Country} from '../interfaces/country.interface';
+import {CountryMapper} from '../Mappers/country.mapper';
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +12,19 @@ import {RestCountry} from '../interfaces/rest-countries';
 export class CountryServices {
   httpService = inject(HttpClient);
 
-  searchByCapital(query: string){
+  searchByCapital(query: string): Observable<Country[]>{
     query = query.toLowerCase();
 
-    return this.httpService.get<RestCountry[]>(`${environment.apiUrlCountries}/capital/${query}`);
+    return this.httpService
+      .get<RestCountry[]>(`${environment.apiUrlCountries}/capital/${query}`)
+      //metodo que nos devuelve el array usando rxjs
+      .pipe(
+        map( rest => CountryMapper.mapRestCountryArrayToCountryArray(rest)),
+        catchError( error => {
+          console.log('Error Catch ',error);
+          return throwError( () => new Error(`No se pudo encontrar pais con el nombre: ${query}`));
+        })
+      )
 
   }
 }
